@@ -5,7 +5,20 @@ from pyarrow.dataset import dataset
 
 from config import Config
 
-dataset = read_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\dataset\dataset.csv")
+class DataCleaning():
+    dataset = pd.read_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\data\dataset.csv")
+    def __init__(self):
+        pass
+    def normalize(df, col):
+        max = float(dataset[col].max())
+        min = float(dataset[col].min())
+        df[col] = (df[col] - min) / (max - min)
+        return df
+    def DenormalizeResult(value):
+        max = float(dataset["price"].max())
+        min = float(dataset["price"].min())
+        value = float(value)*(max - min) + min
+        return value
 
 
 
@@ -71,6 +84,7 @@ print(dataset.isnull().sum())
 col_min = train_df[feature_cols].min()  # 每列的最小值
 col_max = train_df[feature_cols].max()  # 每列的最大值
 # ② 用同一套 min/max 归一化三个数据集
+
 train_scaled = (train_df[feature_cols] - col_min) / (col_max - col_min)
 val_scaled   = (val_df[feature_cols]   - col_min) / (col_max - col_min)
 test_scaled  = (test_df[feature_cols]  - col_min) / (col_max - col_min)
