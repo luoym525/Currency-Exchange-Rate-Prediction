@@ -1,8 +1,7 @@
 # CNY_GBP_exchange_rate_prediction
 
-```
 A deep learning model for predicting the Chinese Yuan (CNY) to British Pound (GBP) exchange rate using a CNN + LSTM hybrid architecture.
-```
+
 
 ## Dataset
 
