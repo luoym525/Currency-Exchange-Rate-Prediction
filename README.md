@@ -83,6 +83,7 @@ Then install torch and CUDA based on your own GPU version.
 
 For FredAPI, you have to go to the [FRED website](https://fredaccount.stlouisfed.org/apikeys), sign up and apply for your own API key. **Or you can just use the dataset provided in the dataset folder.**
 
+**Most importantly, go to config.py and write in your own file locations and directory path**
 
 ## 2. To train the model
 
