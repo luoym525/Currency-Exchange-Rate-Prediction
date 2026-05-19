@@ -1,7 +1,0 @@
-# ===== Python 自动生成的垃圾文件 =====
-__pycache__/
-*.pyc
-*.pyo
-# ===== IDE（开发工具）配置文件 =====
-.idea/          # PyCharm 的配置，别人用不上
-config.py
