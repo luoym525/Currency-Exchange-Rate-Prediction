@@ -54,7 +54,8 @@ The model uses 23 input features to predict the next day's exchange rate price.
     - Validation set: next 300 samples
     - Test set: last 700 samples
 ```
-Data is split in chronological order, shuffling is disabled to prevent data leakage
+Data is split in chronological order。
+shuffling is disabled to prevent data leakage
 ```
 
 ___
@@ -101,12 +102,13 @@ python CNN_LSTM_model/test.py
 |---|---|
 |MAE (Mean Absolute Error)|0.0095|
 |RMSE (Root Mean Squared Error)|0.0098|
-Below is the graph for results on test dataset:
 
-![[prediction_to_actual.png]]
+The graph for results on test dataset can be found at prediction_to_actual.png
+
 
 ```
-Note: Values above are in normalized scale. Multiply by (price_max - price_min) to get real exchange rate error.
+Note: Values above are in normalized scale. 
+Multiply by (price_max - price_min) to get real exchange rate error.
 ```
 ---
 ## Limitations
