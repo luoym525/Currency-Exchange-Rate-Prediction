@@ -1,25 +1,22 @@
 import os
 import pandas as pd
 from pandas import read_csv
-from pyarrow.dataset import dataset
 
 from config import Config
 
-class DataCleaning():
-    dataset = pd.read_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\data\dataset.csv")
+class DataCleaning:
     def __init__(self):
-        pass
-    def normalize(df, col):
-        max = float(dataset[col].max())
-        min = float(dataset[col].min())
-        df[col] = (df[col] - min) / (max - min)
+        self.dataset = pd.read_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\data\train_dataset.csv")
+    def normalize(self, df, col):
+        max_val = float(self.dataset[col].max())
+        min_val = float(self.dataset[col].min())
+        df[col] = (df[col] - min_val) / (max_val - min_val)
         return df
-    def DenormalizeResult(value):
-        max = float(dataset["price"].max())
-        min = float(dataset["price"].min())
-        value = float(value)*(max - min) + min
-        return value
-
+    def DenormalizeResult(self, val: int):
+        max_val = float(self.dataset["price"].max())
+        min_val = float(self.dataset["price"].min())
+        val = val*(max_val - min_val) + min_val
+        return val
 
 
 # # 数据标准化：CNY_GBP Historical Data.csv
@@ -62,34 +59,35 @@ dataset_location = Config._get_dataset_location()
 #
 # dataset.to_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\dataset\dataset1.csv")
 #
-train_df = dataset.iloc[:2744]
-val_df = dataset.iloc[2744:3044]
-test_df = dataset.iloc[3044:]
+# train_df = dataset.iloc[:2744]
+# val_df = dataset.iloc[2744:3044]
+# test_df = dataset.iloc[3044:]
+#
+# feature_cols = [
+#     'cn_interest_rate', 'uk_interest_rate',
+#     'cn_export', 'cn_import', 'cn_trade_balance',
+#     'uk_export', 'uk_import',
+#     'cn_cpi', 'uk_cpi',
+#     'cn_inflation', 'uk_inflation',
+#     'cn_gdp', 'uk_gdp',
+#     'dxy', 'gold_volatility', 'oil_volatility',
+#     'cn_share_price', 'uk_share_price',
+#     'price', 'open', 'high', 'low', 'change'
+# ]
+#
+# # 查看每列有多少个 NaN
+# print(dataset.isnull().sum())
+# # ① 只用训练集计算 min 和 max
+# col_min = train_df[feature_cols].min()  # 每列的最小值
+# col_max = train_df[feature_cols].max()  # 每列的最大值
+# # ② 用同一套 min/max 归一化三个数据集
+#
+# train_scaled = (train_df[feature_cols] - col_min) / (col_max - col_min)
+# val_scaled   = (val_df[feature_cols]   - col_min) / (col_max - col_min)
+# test_scaled  = (test_df[feature_cols]  - col_min) / (col_max - col_min)
+#
+#
+# train_scaled.to_csv(os.path.join(dataset_location, 'train.csv'))
+# val_scaled.to_csv(os.path.join(dataset_location, 'val.csv'))
+# test_scaled.to_csv(os.path.join(dataset_location, 'test.csv'))
 
-feature_cols = [
-    'cn_interest_rate', 'uk_interest_rate',
-    'cn_export', 'cn_import', 'cn_trade_balance',
-    'uk_export', 'uk_import',
-    'cn_cpi', 'uk_cpi',
-    'cn_inflation', 'uk_inflation',
-    'cn_gdp', 'uk_gdp',
-    'dxy', 'gold_volatility', 'oil_volatility',
-    'cn_share_price', 'uk_share_price',
-    'price', 'open', 'high', 'low', 'change'
-]
-
-# 查看每列有多少个 NaN
-print(dataset.isnull().sum())
-# ① 只用训练集计算 min 和 max
-col_min = train_df[feature_cols].min()  # 每列的最小值
-col_max = train_df[feature_cols].max()  # 每列的最大值
-# ② 用同一套 min/max 归一化三个数据集
-
-train_scaled = (train_df[feature_cols] - col_min) / (col_max - col_min)
-val_scaled   = (val_df[feature_cols]   - col_min) / (col_max - col_min)
-test_scaled  = (test_df[feature_cols]  - col_min) / (col_max - col_min)
-
-
-train_scaled.to_csv(os.path.join(dataset_location, 'train.csv'))
-val_scaled.to_csv(os.path.join(dataset_location, 'val.csv'))
-test_scaled.to_csv(os.path.join(dataset_location, 'test.csv'))
