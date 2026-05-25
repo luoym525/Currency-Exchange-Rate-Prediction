@@ -9,4 +9,4 @@ class Config:
         return r"your dataset location"
     @staticmethod
     def _get_save_directory():
-        return r"path to where you want to save your model data"
+        return r"D:\PYTHON_PROJECT\Currency-Exchange-Rate-Prediction\model_data"

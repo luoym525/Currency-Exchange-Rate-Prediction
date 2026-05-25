@@ -6,7 +6,8 @@ from config import Config
 
 class DataCleaning:
     def __init__(self):
-        self.dataset = pd.read_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\data\train_dataset.csv")
+        # self.dataset = pd.read_csv(r"D:\code\CNY_GBP_exchange_rate_prediction\data\train_dataset.csv")
+        self.dataset = pd.read_csv(r"../data/prev_dataset.csv")
     def normalize(self, df, col):
         max_val = float(self.dataset[col].max())
         min_val = float(self.dataset[col].min())
